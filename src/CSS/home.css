@@ -1,0 +1,15 @@
+body{
+    background-color: seagreen;
+}
+div{
+    color: white;
+    align-items: center;
+}
+H2{
+    text-align: center;
+}
+img {
+    max-width: 33%;
+    height: auto;
+    margin: 5%;
+}
