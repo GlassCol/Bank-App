@@ -1,15 +1,26 @@
-body{
+@import 'bootstrap/dist/css/bootstrap.min.css';
+.parent{
     background-color: seagreen;
+    position:absolute;
+    top:0px;
+    right:0px;
+    bottom:0px;
+    left:0px;
 }
 div{
-    color: white;
+    color: whitesmoke;
     align-items: center;
 }
 H2{
     text-align: center;
 }
 img {
-    max-width: 33%;
+    max-width: 25%;
     height: auto;
     margin: 5%;
+}
+.link{
+    margin-top: 2%;
+    color: blue;
+    text-align: center;
 }

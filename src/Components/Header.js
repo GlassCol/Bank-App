@@ -11,6 +11,7 @@ function Header() {
           <Navbar.Brand href="/">Generic Bank App</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href='/login'>Login</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
