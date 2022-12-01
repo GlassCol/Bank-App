@@ -1,13 +1,15 @@
 package com.bankapp.genericAPI.service;
 
 import com.bankapp.genericAPI.dao.AccountDao;
-import com.bankapp.genericAPI.entity.Account;
-import com.bankapp.genericAPI.Transaction;
+import com.bankapp.genericAPI.entity.AccountEntity;
+import com.bankapp.genericAPI.model.Account;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AccountServiceConcrete implements AccountService{
@@ -15,66 +17,49 @@ public class AccountServiceConcrete implements AccountService{
     private AccountDao accountDao;
 
     @Override
-    public List<Account> getAllAccounts() {return accountDao.findAll();}
+    public List<Account> getAllAccounts() {
+        List<AccountEntity> accountEntities = accountDao.findAll();
+        List<Account> accounts = accountEntities.stream()
+                .map(account -> new Account(account.getAccountId(), account.getUserName(),
+                        account.getFirstName(), account.getLastName(), account.getBalance(), account.getPassword()))
+                .collect(Collectors.toList());
+        return accounts;
+    }
 
     @Override
     public Account getAccountById(int accountId) {
-        Optional<Account> c = this.accountDao.findById(accountId);
-        Account account = null;
-        if(c.isPresent()){
-            account = c.get();
-        }else {
-            throw new RuntimeException("account not found for id :: " + accountId);
-        }
+        AccountEntity accountEntity = accountDao.findById(accountId).get();
+        Account account = new Account();
+        BeanUtils.copyProperties(accountEntity, account);
         return account;
     }
 
     @Override
     public Account addAccount(Account account) {
-        return this.accountDao.save(account);
+        AccountEntity accountEntity = new AccountEntity();
+        BeanUtils.copyProperties(account, accountEntity);
+        accountDao.save(accountEntity);
+        account = accountDao.findLastAddition();
+        return account;
     }
 
     @Override
-    public Account updateAccount(Account account) {
-        return this.accountDao.save(account);
+    public Account updateAccount(int accountId, Account account) {
+        AccountEntity accountEntity = accountDao.findById(accountId).get();
+        accountEntity.setBalance(account.getBalance());
+        accountEntity.setFirstName(account.getFirstName());
+        accountEntity.setLastName(account.getLastName());
+        accountEntity.setPassword(account.getPassword());
+        accountEntity.setUserName(account.getUserName());
+        accountDao.save(accountEntity);
+        return account;
     }
 
     @Override
-    public String deleteAccountById(int accountId) {
-        this.accountDao.deleteById(accountId);
-        return "Account " + accountId + " has been deleted";
-    }
-
-    /**
-     * Method to send a transaction between two accounts
-     * @param origin the account that sends the money
-     * @param destination the account that receives the money
-     * @param amount the amount of money to be sent
-     * @return Transaction : The transaction completed
-     */
-    @Override
-    public Transaction doTransaction(int origin, int destination, int amount) {
-        Account originAccount = getAccountById(origin);
-        Account destinationAccount = getAccountById(destination);
-        Transaction transaction = new Transaction(originAccount.getAccountId(), destinationAccount.getAccountId(), amount);
-        if(isValidTransaction(transaction)){
-            originAccount.setBalance(originAccount.getBalance() - amount);
-            destinationAccount.setBalance(destinationAccount.getBalance() + amount);
-            originAccount.getTransactionList().add(transaction);
-            destinationAccount.getTransactionList().add(transaction);
-            updateAccount(originAccount);
-            updateAccount(destinationAccount);
-        }
-        return transaction;
-    }
-
-    /**
-     * Method to check if a transaction is valid
-     * @param transaction the transaction to be checked
-     * @return Boolean : True if the transaction is valid, false otherwise
-     */
-    public boolean isValidTransaction(Transaction transaction) {
-        return (getAccountById(transaction.getOrigin()).getBalance() - transaction.getTransactionAmount() < 0);
+    public Boolean deleteAccountById(int accountId) {
+        AccountEntity account = accountDao.findById(accountId).get();
+        accountDao.delete(account);
+        return true;
     }
 
     @Override
