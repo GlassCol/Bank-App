@@ -1,6 +1,10 @@
 package com.bankapp.genericAPI.entity;
 
+import com.bankapp.genericAPI.Transaction;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="tbl_accounts")
@@ -9,10 +13,10 @@ public class Account {
     @Column(name="c_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int accountId;
-
     private String userName;
-
+    private Long balance;
     private String Password;
+    private List<Transaction> transactionList = new ArrayList<>();
 
     public Account() {
     }
@@ -45,4 +49,14 @@ public class Account {
     public void setPassword(String password) {
         Password = password;
     }
+
+    public Long getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Long balance) {
+        this.balance = balance;
+    }
+
+    public List<Transaction> getTransactionList() {return this.transactionList;}
 }

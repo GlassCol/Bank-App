@@ -6,4 +6,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AccountDao extends JpaRepository<Account, Integer> {
+    /**
+     * Gets the last element from the jpa
+     * @return Account: the last account in the database
+     */
+    public default Account findLastAddition() {
+        return findAll().get(findAll().size() - 1);
+    }
 }

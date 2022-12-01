@@ -2,6 +2,7 @@ package com.bankapp.genericAPI.service;
 
 import com.bankapp.genericAPI.dao.AccountDao;
 import com.bankapp.genericAPI.entity.Account;
+import com.bankapp.genericAPI.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,5 +43,42 @@ public class AccountServiceConcrete implements AccountService{
     public String deleteAccountById(int accountId) {
         this.accountDao.deleteById(accountId);
         return "Account " + accountId + " has been deleted";
+    }
+
+    /**
+     * Method to send a transaction between two accounts
+     * @param origin the account that sends the money
+     * @param destination the account that receives the money
+     * @param amount the amount of money to be sent
+     * @return Transaction : The transaction completed
+     */
+    @Override
+    public Transaction doTransaction(int origin, int destination, int amount) {
+        Account originAccount = getAccountById(origin);
+        Account destinationAccount = getAccountById(destination);
+        Transaction transaction = new Transaction(originAccount.getAccountId(), destinationAccount.getAccountId(), amount);
+        if(isValidTransaction(transaction)){
+            originAccount.setBalance(originAccount.getBalance() - amount);
+            destinationAccount.setBalance(destinationAccount.getBalance() + amount);
+            originAccount.getTransactionList().add(transaction);
+            destinationAccount.getTransactionList().add(transaction);
+            updateAccount(originAccount);
+            updateAccount(destinationAccount);
+        }
+        return transaction;
+    }
+
+    /**
+     * Method to check if a transaction is valid
+     * @param transaction the transaction to be checked
+     * @return Boolean : True if the transaction is valid, false otherwise
+     */
+    public boolean isValidTransaction(Transaction transaction) {
+        return (getAccountById(transaction.getOrigin()).getBalance() - transaction.getTransactionAmount() < 0);
+    }
+
+    @Override
+    public int getLatestAccountId() {
+        return accountDao.findLastAddition().getAccountId();
     }
 }
