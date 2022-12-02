@@ -18,10 +18,16 @@ function CreateAccount() {
             src={Logo}
             alt='Logo' />
             <h1>Please Create An Account</h1>
-            <Form.Group className='mb-1' controlId="sign-in-email-address">
+            <Form.Group className='mb-1' controlId="email-address">
                 <Form.Control type='email' size='lg' placeholder='Email Address' autoComplete='username' className='position-relative'/>
             </Form.Group>
-            <Form.Group className='mb-3' controlId="sign-in-password">
+            <Form.Group className='mb-1' controlId="first-name">
+                <Form.Control type='text' size='lg' placeholder='First Name' autoComplete='given-name' className='position-relative'/>
+            </Form.Group>
+            <Form.Group className='mb-1' controlId="last-name">
+                <Form.Control type='text' size='lg' placeholder='Last Name' autoComplete='family-name' className='position-relative'/>
+            </Form.Group>
+            <Form.Group className='mb-3' controlId="password">
                 <Form.Control type='password' size='lg' placeholder='Password' autoComplete='Password' className='position-relative' />
             </Form.Group>
             <Form.Group className='d-flex justify-content-center mb-1' controlId="remember-me">
