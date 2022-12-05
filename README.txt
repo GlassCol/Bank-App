@@ -1,6 +1,7 @@
 # Bank_Demo_App
 
-This application is being made with the intentions of practicing with React js and Spring Security. The application is meant to allow a user to login and use a website in order to fullfill transaction between accounts
+This application is being made with the intentions of practicing with React js and Spring Security.
+The application is meant to allow a user to login and use a website in order to fullfill transaction between accounts
 
 #Design
 This is a react app using a java spring boot api to connect to a database of the user's choice
