@@ -11,9 +11,6 @@ return axios.post(TRANSACTION_API_BASE_URL, transaction);
 getItemById(transactionId) {
 return axios.get(TRANSACTION_API_BASE_URL + "/" + transactionId);
 }
-deleteItem(transactionId) {
-return axios.delete(TRANSACTION_API_BASE_URL + "/" + transactionId);
-}
 getAllAccountTransactions(accountId) {
 return axios.get(TRANSACTION_API_BASE_URL + "/account/" + accountId);
 }
