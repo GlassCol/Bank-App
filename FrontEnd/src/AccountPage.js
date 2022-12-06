@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import Header from './Components/Header'
+import Sidebar from './Components/SideBar';
+import './CSS/home.css';
 
 const AccountPage = ( {account} ) => {
   
     return (
-      <div>
+      <div className='parent'>
         <Header />
-        <h1>Welcome {account.firstName}</h1>
+        <Sidebar />
       </div>
     )
   }

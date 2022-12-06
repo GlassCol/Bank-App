@@ -13,7 +13,7 @@ export default function App() {
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/CreateAnAccount' element={<CreateAccount />} />
-            <Route path='/AccountPage' element={<AccountPage />} onEnter={AccountService.checkLoginStatus()} />
+            <Route path='/AccountPage' element={<AccountPage />} />
       </Routes>
     </Router>
 
