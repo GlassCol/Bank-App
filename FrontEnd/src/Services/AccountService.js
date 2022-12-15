@@ -20,14 +20,14 @@ class AccountService {
         return axios.put(ACCOUNT_API_BASE_URL + "/" + accountId, account);
     }
     checkLoginStatus() {
-        axios.get(ACCOUNT_API_BASE_URL + "/LoginCheck").then(response => {
-            console.log("logged in", response);
-            if (response === false) {
-                LoginRedirect.LoginRedirect();
-            }
-        }).catch(error => {
-            console.log("check login error", error);
-        });
+        //axios.get(ACCOUNT_API_BASE_URL + "/LoginCheck").then(response => {
+           //console.log("logged in", response);
+           // if (response === false) {
+                LoginRedirect.RedirectToAccountPage();
+           // }
+        //}).catch(error => {
+        //    console.log("check login error", error);
+        //});
     }
 }
 
