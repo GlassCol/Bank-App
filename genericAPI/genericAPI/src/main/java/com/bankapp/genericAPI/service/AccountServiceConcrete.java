@@ -19,10 +19,10 @@ public class AccountServiceConcrete implements AccountService{
     @Override
     public List<Account> getAllAccounts() {
         List<AccountEntity> accountEntities = accountDao.findAll();
-        List<Account> accounts = accountEntities.stream()
-                .map(account -> new Account(account.getAccountId(), account.getUserName(),
-                        account.getFirstName(), account.getLastName(), account.getBalance(), account.getPassword()))
-                .collect(Collectors.toList());
+       List<Account> accounts = null;
+        //        .map(account -> new Account(account.getAccountId(), account.getUserName(),
+       //                 account.getFirstName(), account.getLastName(), account.getBalance(), account.getPassword()))
+        //        .collect(Collectors.toList());
         return accounts;
     }
 
