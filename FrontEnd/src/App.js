@@ -5,6 +5,7 @@ import Login from './Login';
 import CreateAccount from './CreateAccount';
 import AccountPage from './AccountPage';
 import AccountService from './Services/AccountService';
+import ResetPasswordPage from './ResetPasswordPage';
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
             <Route path='/login' element={<Login />} />
             <Route path='/CreateAnAccount' element={<CreateAccount />} />
             <Route path='/AccountPage' element={<AccountPage />} />
+            <Route path='/ResetPassword' element={<ResetPasswordPage />} />
       </Routes>
     </Router>
 

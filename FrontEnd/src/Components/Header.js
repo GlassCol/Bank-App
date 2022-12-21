@@ -6,7 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 function Header() {
   return (
     <>
-      <Navbar bg="dark" variant="dark">
+      <Navbar bg="dark" variant="dark" style={{ height: "7%"}}>
         <Container>
           <Navbar.Brand href="/">Generic Bank App</Navbar.Brand>
           <Nav className="me-auto">
