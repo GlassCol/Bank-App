@@ -8,7 +8,7 @@ function UpdateInfoCard() {
             <div className="card-body">
                 <h5 className="card-title" style={{ height: "20%" }}>Update Account Information</h5>
                 <p class="card-text" style={{ height: "30%" }}>Update your account information here.</p>
-                <a href="#" class="btn btn-primary" style={{ height: "25%" }}>Update Information</a>
+                <a href="/UpdateInfo" class="btn btn-primary" style={{ height: "25%" }}>Update Information</a>
             </div>
             </div>
     )

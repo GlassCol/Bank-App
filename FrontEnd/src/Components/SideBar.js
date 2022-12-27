@@ -15,7 +15,7 @@ const Sidebar = () => {
       <CDBSidebar textColor="#fff" backgroundColor="#292b2c" style={{ height: '100%'} }>
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
           <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
-            Sidebar
+
           </a>
         </CDBSidebarHeader>
 
@@ -27,8 +27,8 @@ const Sidebar = () => {
             <NavLink exact to="/tables" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="table">Tables</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/profile" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>
+            <NavLink exact to="/AccountPage" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="user">Account page</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/analytics" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="chart-line">Analytics</CDBSidebarMenuItem>
@@ -42,7 +42,6 @@ const Sidebar = () => {
               padding: '20px 5px',
             }}
           >
-            Sidebar Footer
           </div>
         </CDBSidebarFooter>
       </CDBSidebar>
